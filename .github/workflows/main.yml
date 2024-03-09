@@ -50,6 +50,8 @@ jobs:
           key: ${{ runner.os }}-npm-${{ steps.cache-node-modules.outputs.cache-key }}
           restore-keys: |
             ${{ runner.os }}-npm-
+      - name: Use Cached Dependencies
+        run: npm ci
 
       - name: Run linter
         run: npm run lint:fix
