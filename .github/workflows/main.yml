@@ -31,7 +31,11 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build --if-present
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-files
+          path: ./build
+          run: npm run build --if-present
 
   linter:
     needs: build
@@ -55,3 +59,25 @@ jobs:
 
       - name: Run linter
         run: npm run lint:fix
+
+  e2e:
+    needs: linter
+    name: cypress-run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download Build
+        uses: actions/download-artifact@v4
+        with:
+          name: production-files
+          path: ./dist
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          start: npm run dev
+          wait-on: http://localhost:5173
+          command: npm run cypress
+        env:
+          CLIENT_BASE_URL: ${{ secrets.CLIENT_BASE_URL }}
