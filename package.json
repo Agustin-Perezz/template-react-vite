@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "lint:fix": "eslint --fix",
     "prettier:write": "prettier --write",
+    "cypress": "npx cypress run",
     "cypress:open": "cypress open --browser chrome --e2e",
     "preview": "vite preview",
     "prepare": "husky install"
