@@ -84,6 +84,8 @@ jobs:
           command: npm run cypress
         env:
           CLIENT_BASE_URL: ${{ secrets.CLIENT_BASE_URL }}
+      - name: Run post tests
+        run: npm run posttest
 
   coverage_report:
     name: Generate coverage report
