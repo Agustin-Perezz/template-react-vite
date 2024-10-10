@@ -84,8 +84,6 @@ jobs:
           command: npm run cypress
         env:
           CLIENT_BASE_URL: ${{ secrets.CLIENT_BASE_URL }}
-      - name: Run post tests
-        run: npm run posttest
 
   coverage_report:
     name: Generate coverage report
@@ -101,6 +99,5 @@ jobs:
         with:
           coverage-files: ./coverage/lcov.info
           minimum-coverage: 90
-          artifact-name: code-coverage-report
           github-token: ${{ secrets.GITHUB_TOKEN }}
           update-comment: true
