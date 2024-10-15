@@ -84,6 +84,11 @@ jobs:
           command: npm run cypress
         env:
           CLIENT_BASE_URL: ${{ secrets.CLIENT_BASE_URL }}
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-folder
+          path: coverage
 
   coverage_report:
     name: Generate coverage report
@@ -92,8 +97,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Generate coverage folder
-        run: npx nyc report --reporter lcov
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-folder
+          path: coverage
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Report code coverage
