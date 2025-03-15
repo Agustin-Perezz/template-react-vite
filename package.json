@@ -12,7 +12,8 @@
     "cypress:open": "cypress open --e2e",
     "posttest": "npx nyc report --reporter lcov --reporter text --report-dir coverage",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "copy-env": "./scripts/copy-env.sh"
   },
   "dependencies": {
     "react": "^18.2.0",
