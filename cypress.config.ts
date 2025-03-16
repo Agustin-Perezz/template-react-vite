@@ -1,4 +1,4 @@
-import codeCoverageTask from '@cypress/code-coverage/task.js';
+import coverageTask from '@cypress/code-coverage/task.js';
 import { defineConfig } from 'cypress';
 import { config } from 'dotenv';
 
@@ -9,7 +9,7 @@ export default defineConfig({
     baseUrl: process.env.CLIENT_BASE_URL,
     env: { base_url: process.env.CLIENT_BASE_URL },
     setupNodeEvents(on, config) {
-      codeCoverageTask(on, config);
+      coverageTask(on, config);
       return config;
     },
   },
